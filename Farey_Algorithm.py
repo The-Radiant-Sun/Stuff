@@ -1,6 +1,6 @@
 class Farey_Algorithm:
-    def __init__(self, iterations):
-        self.iterations = iterations
+    def __init__(self, limit):
+        self.limit = limit
 
     def convert(self, integer):
         sNum = integer.split('.')
@@ -10,7 +10,7 @@ class Farey_Algorithm:
         uNumer, uDenom = 1, 1
         lNumer, lDenom = 0, 1
 
-        for i in range(self.iterations):
+        for i in range(self.limit):
             nNumer = uNumer + lNumer
             nDenom = uDenom + lDenom
             if nNumer / nDenom < dNum:
