@@ -12,7 +12,7 @@ print(f"The approximated fraction is {values[0]}/{values[1]}, with a decimal con
 HA = Hailstone_Algorithm(requestPRN("Input cycle limit: "))
 HA.reduce(requestPRN("Input values: "))"""
 
-from Multithreading import Multithreading
+"""from Multithreading import Multithreading
 MT = Multithreading()
 
 
@@ -21,6 +21,8 @@ def p(n):
 
 
 for i in range(5):
-    MT.openActiveThread(str(i), p, (i,))
+    MT.openActiveThread(str(i), p, (i,))"""
 
+"""import File_Type_Converter
 
+File_Type_Converter.convertFileTypesInFolders('/Users/finn/Documents/PycharmProjects/Jump-Recorder/Info', 'csv', 'txt')"""
