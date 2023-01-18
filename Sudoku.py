@@ -2,6 +2,7 @@ import random
 import time
 
 
+
 class Sudoku_Generator:
     def __init__(self):
         self.board = [[0 for _ in range(9)] for _ in range(9)]
@@ -16,13 +17,10 @@ class Sudoku_Generator:
     def fill_board(self, row, col):
         if row == 9:
             return True
-
         if col == 9:
             return self.fill_board(row + 1, 0)
-
         if self.board[row][col] != 0:
             return self.fill_board(row, col + 1)
-
         nums = [1, 2, 3, 4, 5, 6, 7, 8, 9]
         random.shuffle(nums)
         for num in nums:
@@ -34,24 +32,12 @@ class Sudoku_Generator:
         return False
 
     def is_valid(self, row, col, num):
-        # Check row
         for i in range(9):
-            if self.board[row][i] == num:
+            if self.board[row][i] == num or self.board[i][col] == num or self.board[row // 3 * 3 + i // 3][col // 3 * 3 + i % 3] == num:
                 return False
-        # Check column
-        for i in range(9):
-            if self.board[i][col] == num:
-                return False
-        # Check sub-grid
-        startRow, startCol = row - row % 3, col - col % 3
-        for i in range(3):
-            for j in range(3):
-                if self.board[i + startRow][j + startCol] == num:
-                    return False
         return True
 
     def remove_digits(self):
-        # Change this range for difficulty
         for i in range(random.randint(40, 50)):
             row = random.randint(0, 8)
             col = random.randint(0, 8)
@@ -79,7 +65,6 @@ class Sudoku_Generator:
             for j in range(9):
                 if j % 3 == 0 and j != 0:
                     print(" | ", end="")
-
                 if j == 8:
                     print(self.board[i][j])
                 else:

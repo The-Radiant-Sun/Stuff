@@ -28,7 +28,7 @@ from Sudoku import *
 
 Generator = Sudoku_Generator()
 Generator.generate()
-
+print("\n")
 Sudoku = Sudoku_Solver(Generator.board)
 Sudoku.solve()
 Sudoku.display()
