@@ -2,6 +2,7 @@ import os
 
 
 def convertFileType(location: str, target: str, result: str):
+    print(f"Replacing {target} with {result} in {location.split('/')[-1]}")
     files = os.listdir(location)  # Find all files
     for file in files:
         if '.' in file and file.split('.')[1] == target:  # Identify target file types
