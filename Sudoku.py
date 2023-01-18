@@ -2,7 +2,6 @@ import random
 import time
 
 
-
 class Sudoku_Generator:
     def __init__(self):
         self.board = [[0 for _ in range(9)] for _ in range(9)]
@@ -81,7 +80,6 @@ class Sudoku_Solver:
         self.backtracks = 0
         self.start_time = None
         self.solved = False
-        self.difficulty = None
 
         for row in range(9):
             for col in range(9):
@@ -120,17 +118,6 @@ class Sudoku_Solver:
                     return False
         return True
 
-    def calculate_difficulty(self):
-        empty_cells = sum(row.count(0) for row in self.board)
-        if empty_cells > 40:
-            return "Expert"
-        elif empty_cells > 30:
-            return "Hard"
-        elif empty_cells > 20:
-            return "Intermediate"
-        else:
-            return "Easy"
-
     def display(self):
         for i in range(9):
             if i % 3 == 0 and i != 0:
@@ -146,6 +133,5 @@ class Sudoku_Solver:
                     print(str(self.board[i][j]) + " ", end="")
         if self.solved:
             print("\nSolved in {:.2f} seconds with {} backtracks.".format(self.elapsed_time, self.backtracks))
-            print("Difficulty: {}".format(self.difficulty))
         else:
             print("\nUnable to find a solution.")
