@@ -23,7 +23,7 @@ class Sudoku_Generator:
         nums = [1, 2, 3, 4, 5, 6, 7, 8, 9]
         random.shuffle(nums)
         for num in nums:
-            if self.is_valid(row, col, num):
+            if all(num != self.board[row][i] and num != self.board[i][col] and num != self.board[row // 3 * 3 + i // 3][col // 3 * 3 + i % 3] for i in range(9)):
                 self.board[row][col] = num
                 if self.fill_board(row, col + 1):
                     return True
@@ -31,30 +31,16 @@ class Sudoku_Generator:
         return False
 
     def is_valid(self, row, col, num):
-        for i in range(9):
-            if self.board[row][i] == num or self.board[i][col] == num or self.board[row // 3 * 3 + i // 3][col // 3 * 3 + i % 3] == num:
-                return False
-        return True
+        return not (num in [self.board[row][i] for i in range(9)] or num in [self.board[i][col] for i in range(9)] or num in [self.board[row // 3 * 3 + i // 3][col // 3 * 3 + i % 3] for i in range(9)])
 
     def remove_digits(self):
-        for i in range(random.randint(40, 50)):
-            row = random.randint(0, 8)
-            col = random.randint(0, 8)
-            while self.board[row][col] == 0:
-                row = random.randint(0, 8)
-                col = random.randint(0, 8)
-            self.board[row][col] = 0
+        gaps = [(i, j) for i in range(9) for j in range(9) if self.board[i][j] != 0]
+        for i in random.sample(gaps, random.randint(40, 50)):
+            self.board[i[0]][i[1]] = 0
 
     def calculate_difficulty(self):
         empty_cells = sum(row.count(0) for row in self.board)
-        if empty_cells > 40:
-            return "Expert"
-        elif empty_cells > 30:
-            return "Hard"
-        elif empty_cells > 20:
-            return "Intermediate"
-        else:
-            return "Easy"
+        return "Expert" if empty_cells > 40 else "Hard" if empty_cells > 30 else "Intermediate" if empty_cells > 20 else "Easy"
 
     def display(self):
         for i in range(9):
@@ -92,7 +78,6 @@ class Sudoku_Solver:
 
     def solve(self):
         self.start_time = time.time()
-        self.difficulty = self.calculate_difficulty()
         if self._solve():
             self.solved = True
         self.end_time = time.time()
