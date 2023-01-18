@@ -1,6 +1,3 @@
-def requestPRN(question):
-    return abs(round(int(input(question))))
-
 """from Farey_Algorithm import Farey_Algorithm
 
 FA = Farey_Algorithm(requestPRN("Input cycle limit: "))
@@ -26,3 +23,9 @@ for i in range(5):
 """import File_Type_Converter
 
 File_Type_Converter.convertFileTypesInFolders('/Users/finn/Documents/PycharmProjects/Jump-Recorder/Info', 'csv', 'txt')"""
+
+from Sudoku_Solver import Sudoku_Solver
+sudoku = Sudoku_Solver()
+sudoku.solve()
+sudoku.display()
+
